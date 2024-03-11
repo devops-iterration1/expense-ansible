@@ -21,7 +21,7 @@
     - name: download app content to app_dir
       ansible.builtin.unarchive:
         src: https://expense-artifacts.s3.amazonaws.com/expense-frontend-v2.zip
-        dest: /usr/local/bin
+        dest: /usr/share/nginx/html
         remote_src: yes
     - name: start_nginx
       ansible.builtin.systemd_service:
