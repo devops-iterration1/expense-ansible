@@ -1,57 +1,57 @@
 - name: diable_default_node_version
-    ansible.builtin.shell: dnf module disable nodejs -y
+  ansible.builtin.shell: dnf module disable nodejs -y
 
 - name: enable_nodejs_20
-    ansible.builtin.shell: dnf module enable nodejs:20 -y
+  ansible.builtin.shell: dnf module enable nodejs:20 -y
 
 - name: install_nodejs
-    ansible.builtin.dnf:
+  ansible.builtin.dnf:
     name: nodejs
     state: installed
 
 - name: add_expense_user
-    ansible.builtin.user:
+  ansible.builtin.user:
     name: expense
 
 - name: copy_backend.service
-    ansible.builtin.copy:
+  ansible.builtin.copy:
     src: backend.service
     dest: /etc/systemd/system/backend.service
 
 - name: remove_old_content
-    ansible.builtin.file:
+  ansible.builtin.file:
     path: /app
     state: absent
 
 - name: create_new_directory
-    ansible.builtin.file:
+  ansible.builtin.file:
     path: /app
     state: directory
 
 - name: download_app_content_to_dir
-    ansible.builtin.unarchive:
+  ansible.builtin.unarchive:
     src: https://expense-artifacts.s3.amazonaws.com/expense-backend-v2.zip
     dest: /app
     remote_src: yes
 - name: install_node_modules
-    community.general.npm:
+  community.general.npm:
     path: /app
     state: latest
 
 - name: install_mysql_client
-    ansible.builtin.pip:
+  ansible.builtin.pip:
     name: 
         - PyMySQL
         - cryptography
     executable: pip3.9
 
 - name: install_dnf_mysql
-    ansible.builtin.dnf:
+  ansible.builtin.dnf:
     name: mysql
     state: installed
 
 - name: load_schema_to_db
-    community.mysql.mysql_db:
+  community.mysql.mysql_db:
     name: all
     state: import
     target: /app/schema/backend.sql
@@ -60,7 +60,7 @@
     login_host: 172.31.2.97
 
 - name: restart_backend_service
-    ansible.builtin.systemd_service:
+  ansible.builtin.systemd_service:
     state: restarted
     name: backend
     enabled: yes

@@ -1,31 +1,31 @@
 - name: install_nginx
-    ansible.builtin.dnf:
+  ansible.builtin.dnf:
     name: nginx
     state: latest
 
 - name: reverse_proxy_setup
-    ansible.builtin.copy:
+  ansible.builtin.copy:
     src: proxy.conf
     dest: /etc/nginx/default.d/proxy.conf
 
 - name: remove_default_app
-    ansible.builtin.file:
+  ansible.builtin.file:
     path: /usr/share/nginx/html
     state: absent
 
 - name: create_app_directory
-    ansible.builtin.file:
+  ansible.builtin.file:
     path: /usr/share/nginx/html
     state: directory
 
 - name: download app content to app_dir
-    ansible.builtin.unarchive:
+  ansible.builtin.unarchive:
     src: https://expense-artifacts.s3.amazonaws.com/expense-frontend-v2.zip
     dest: /usr/share/nginx/html
     remote_src: yes
 
 - name: start_nginx
-    ansible.builtin.systemd_service:
+  ansible.builtin.systemd_service:
     state: restarted
     name: nginx
     enabled: yes
