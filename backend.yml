@@ -49,6 +49,11 @@
           - cryptography
         executable: pip3.9
 
+    - name: install_dnf_mysql
+      ansible.builtin.dnf:
+        name: mysql
+        state: installed
+
     - name: load_schema_to_db
       community.mysql.mysql_db:
         name: all
