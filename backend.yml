@@ -35,7 +35,7 @@
         dest: /app
         remote_src: yes
     - name: install_node_modules
-      ansible.general.npm:
+      community.general.npm:
         path: /app
         state: latest
 
