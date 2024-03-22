@@ -1,66 +1,66 @@
-name: backend_setup
-hosts: all
-become: yes
-tasks:
-  - name: diable_default_node_version
-    ansible.builtin.shell: dnf module disable nodejs -y
+- name: backend_setup
+  hosts: all
+  become: yes
+  tasks:
+    - name: diable_default_node_version
+      ansible.builtin.shell: dnf module disable nodejs -y
 
-  - name: install_nodejs
-    ansible.builtin.dnf:
-      name: nodejs
-      status: installed
+    - name: install_nodejs
+      ansible.builtin.dnf:
+        name: nodejs
+        status: installed
 
-  - name: add_expense_user
-    ansible.builtin.user:
-      name: expense
+    - name: add_expense_user
+      ansible.builtin.user:
+        name: expense
 
-  - name: copy_backend.service
-    ansible.builtin.copy:
-      src: backend.service
-      dest: /etc/systemd/system/backend.service
+    - name: copy_backend.service
+      ansible.builtin.copy:
+        src: backend.service
+        dest: /etc/systemd/system/backend.service
 
-  - name: remove_old_content
-    ansible.builtin.file:
-      path: /app
-      state: absent
+    - name: remove_old_content
+      ansible.builtin.file:
+        path: /app
+        state: absent
 
-  - name: create_new_directory
-    ansible.builtin.file:
-      path: /app
-      state: directory
+    - name: create_new_directory
+      ansible.builtin.file:
+        path: /app
+        state: directory
 
-  - name: download_app_content_to_dir
-    ansible.builtin.unarchive:
-      src: https://expense-artifacts.s3.amazonaws.com/expense-backend-v2.zip
-      dest: /app
-      remote_src: yes
+    - name: download_app_content_to_dir
+      ansible.builtin.unarchive:
+        src: https://expense-artifacts.s3.amazonaws.com/expense-backend-v2.zip
+        dest: /app
+        remote_src: yes
 
-  - name: install_node_modules
-    ansible.general.npm:
-      path: /app
-      state: latest
+    - name: install_node_modules
+      ansible.general.npm:
+        path: /app
+        state: latest
 
-  - name: install_mysql_client
-    ansible.builtin.pip:
-      name: 
-        - PyMySQL
-        - cryptography
-      executable: pip3.9
+    - name: install_mysql_client
+      ansible.builtin.pip:
+        name: 
+          - PyMySQL
+          - cryptography
+        executable: pip3.9
 
-  - name: load_schema_to_db
-    community.mysql.mysql_db:
-      name: all
-      state: import
-      target: /app/schema/backend.sql
-      login_user: root
-      login_password: ExpenseApp@1
+    - name: load_schema_to_db
+      community.mysql.mysql_db:
+        name: all
+        state: import
+        target: /app/schema/backend.sql
+        login_user: root
+        login_password: ExpenseApp@1
 
-  - name: restart_backend_service
-    ansible.builtin.systemd_service:
-      state: restarted
-      name: backend
-      enabled: yes
-      daemon_reload: yes
+    - name: restart_backend_service
+      ansible.builtin.systemd_service:
+        state: restarted
+        name: backend
+        enabled: yes
+        daemon_reload: yes
     
 
 
