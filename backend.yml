@@ -34,7 +34,6 @@
         src: https://expense-artifacts.s3.amazonaws.com/expense-backend-v2.zip
         dest: /app
         remote_src: yes
-
     - name: install_node_modules
       ansible.general.npm:
         path: /app
@@ -61,40 +60,3 @@
         name: backend
         enabled: yes
         daemon_reload: yes
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-# 
- 
-# prepare_app
-# 
-# print_activity "install_node_dependencies"
-# npm install &>>LOG
-# status $?
-# 
-# print_activity "restart_backend_service"
-# systemctl daemon-reload &>>LOG
-# systemctl enable backend &>>LOG
-# systemctl start backend &>>LOG
-# status $?
-# 
-# print_activity "install_sql_client_to_load_schema"
-# dnf install mysql -y &>>LOG
-# status $?
-# 
-# print_activity "load_schema_to_db"
-# mysql -h 172.31.10.216 -uroot -p${mysql_root_pwd} < /app/schema/backend.sql
-# status $?
