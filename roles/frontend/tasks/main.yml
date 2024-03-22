@@ -8,21 +8,11 @@
     src: proxy.conf
     dest: /etc/nginx/default.d/proxy.conf
 
-- name: remove_default_app
-  ansible.builtin.file:
-    path: /usr/share/nginx/html
-    state: absent
-
-- name: create_app_directory
-  ansible.builtin.file:
-    path: /usr/share/nginx/html
-    state: directory
-
-- name: download app content to app_dir
-  ansible.builtin.unarchive:
-    src: https://expense-artifacts.s3.amazonaws.com/expense-frontend-v2.zip
-    dest: /usr/share/nginx/html
-    remote_src: yes
+- name: prepare_app
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: prepare-app
+    
 
 - name: start_nginx
   ansible.builtin.systemd_service:
