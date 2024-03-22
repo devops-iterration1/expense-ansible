@@ -4,15 +4,14 @@
     state: latest
 
 - name: reverse_proxy_setup
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: proxy.conf
     dest: /etc/nginx/default.d/proxy.conf
 
 - name: prepare_app
   ansible.builtin.import_role:
     name: common
-    tasks_from: prepare-app
-    
+    tasks_from: prepare-app    
 
 - name: start_nginx
   ansible.builtin.systemd_service:
