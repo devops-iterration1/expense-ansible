@@ -9,5 +9,14 @@
     enabled: yes
     state: started
 
+- name: check_mysql_connect
+  community.mysql.mysql_info:
+    login_user: root
+    login_password: ExpenseApp@1
+    login_host: "{{ db_ip }}"
+    filter: version
+  register: db-status
+
 - name: setup_sql_pwd
   ansible.builtin.shell: mysql_secure_installation --set-root-pass ExpenseApp@1
+  when: db-status.failed is true
