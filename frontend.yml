@@ -1,5 +1,5 @@
-- name: frontend_setup
+- name: expense_project_setup
   hosts: all
   become: yes
   roles:
-    - frontend
+    - "{{ role_name }}"
