@@ -23,20 +23,11 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - -i
-                - 172.31.80.8,
-                - -e
-                - ansible_user=ec2-user
-                - -e
-                - ansible_password=DevOps321
-                - -e
-                - role_name=database
-                - -e
-                - env=dev
-                - -e
-                - db_ip=172.31.80.8
-                - expense_setup.yml
-                command: ansible-playbook
+                - ansible.sh
+                - frontend
+                - 172.31.80.151
+                - 172.31.81.158
+                command: bash
                 run_if: passed
     - QA:
         fetch_materials: true
@@ -66,20 +57,11 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - -i
-                - 172.31.80.8,
-                - -e
-                - ansible_user=ec2-user
-                - -e
-                - ansible_password=DevOps321
-                - -e
-                - role_name=database
-                - -e
-                - env=dev
-                - -e
-                - db_ip=172.31.80.8
-                - expense_setup.yml
-                command: ansible-playbook
+                - ansible.sh
+                - frontend
+                - 172.31.80.151
+                - 172.31.81.158
+                command: bash
                 run_if: passed
     - PROD:
         fetch_materials: true
@@ -92,18 +74,9 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - -i
-                - 172.31.80.8,
-                - -e
-                - ansible_user=ec2-user
-                - -e
-                - ansible_password=DevOps321
-                - -e
-                - role_name=database
-                - -e
-                - env=dev
-                - -e
-                - db_ip=172.31.80.8
-                - expense_setup.yml
-                command: ansible-playbook
+                - ansible.sh
+                - frontend
+                - 172.31.80.151
+                - 172.31.81.158
+                command: bash
                 run_if: passed
