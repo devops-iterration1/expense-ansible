@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  frontend:
+  database:
     group: defaultGroup
     label_template: ${COUNT}
     lock_behavior: none
@@ -26,9 +26,9 @@ pipelines:
             - exec:
                 arguments:
                 - ansible.sh
-                - frontend
-                - 172.31.80.151
-                - 172.31.81.158
+                - database
+                - 172.31.80.8
+                - 172.31.80.8
                 command: bash
                 run_if: passed
     - QA:
@@ -45,9 +45,9 @@ pipelines:
             - exec:
                 arguments:
                 - ansible.sh
-                - frontend
-                - 172.31.80.151
-                - 172.31.81.158
+                - database
+                - 172.31.80.8
+                - 172.31.80.8
                 command: bash
                 run_if: passed
     - STAGE:
@@ -64,9 +64,9 @@ pipelines:
             - exec:
                 arguments:
                 - ansible.sh
-                - frontend
-                - 172.31.80.151
-                - 172.31.81.158
+                - database
+                - 172.31.80.8
+                - 172.31.80.8
                 command: bash
                 run_if: passed
     - PROD:
@@ -83,8 +83,8 @@ pipelines:
             - exec:
                 arguments:
                 - ansible.sh
-                - frontend
-                - 172.31.80.151
-                - 172.31.81.158
+                - database
+                - 172.31.80.8
+                - 172.31.80.8
                 command: bash
                 run_if: passed
