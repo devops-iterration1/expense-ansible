@@ -27,8 +27,8 @@ pipelines:
                 arguments:
                 - ansible.sh
                 - backend
-                - 172.31.81.158 # host_ip
-                - 172.31.80.8  # db_ip
+                - 172.31.80.61 # host_ip
+                - 172.31.80.10  # db_ip
                 command: bash
                 run_if: passed
     - QA:
