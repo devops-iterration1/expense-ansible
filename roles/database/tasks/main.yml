@@ -20,7 +20,7 @@
   community.mysql.mysql_info:
     login_user: root
     login_password: ExpenseApp@1
-    login_host: "{{ ip }}"
+    login_host: db-{{ env }}.izypsy.cloud
     filter: version
   register: db_status
   ignore_errors: yes

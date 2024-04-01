@@ -47,7 +47,7 @@
     target: /app/schema/backend.sql
     login_user: root
     login_password: ExpenseApp@1
-    login_host: "{{ ip }}"
+    login_host: db-{{ env }}.izypsy.cloud
 
 - name: restart_backend_service
   ansible.builtin.systemd_service:
