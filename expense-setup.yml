@@ -1,3 +1,4 @@
+# entry point of ansible project
 - name: expense_project_setup
   hosts: all
   become: yes
