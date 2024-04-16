@@ -46,7 +46,7 @@
     state: import
     target: /app/schema/backend.sql
     login_user: root
-    login_password: ExpenseApp@1
+    login_password: "{{ mysql_root_pwd" }}
     login_host: database-{{ env }}.izypsy.cloud
 
 - name: install_newrelic
