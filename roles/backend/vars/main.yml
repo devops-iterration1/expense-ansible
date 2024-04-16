@@ -1,3 +1,4 @@
 app_loc: /app
 component: backend
 app_user: expense
+NEWRELIC_KEY: fd5432195073a050efd4b5bf61c3c003FFFFNRAL
