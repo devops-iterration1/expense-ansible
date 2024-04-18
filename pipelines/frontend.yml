@@ -29,8 +29,6 @@ pipelines:
                 arguments:
                 - ansible.sh
                 - frontend
-                - 172.31.85.31 #host_ip
-                - 172.31.80.61 #be_ip
                 command: bash
                 run_if: passed
     - QA:
