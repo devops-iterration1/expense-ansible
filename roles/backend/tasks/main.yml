@@ -47,7 +47,7 @@
     target: /app/schema/backend.sql
     login_user: root
     login_password: "{{ mysql_root_pwd }}"
-    login_host: "10.10.0.69" # database-{{ env }}.izypsy.cloud
+    login_host:  database-{{ env }}.izypsy.cloud
 
 - name: install_newrelic
   ansible.builtin.import_role:
